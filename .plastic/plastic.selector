@@ -1,4 +1,0 @@
-repository "flappy-bird 2025-10-15_14-25-07/flappy-bird@14569678420910@cloud"
-  path "/"
-    br "/main"
-    co "/main"
