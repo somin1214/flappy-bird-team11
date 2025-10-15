@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 8611ae64987504e75a638f8645d5b9c7
+=======
+guid: 36409fe4122a94d4f8c23876780250f3
+>>>>>>> 6c1f287 (player 수정)
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
