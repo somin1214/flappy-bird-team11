@@ -4,21 +4,30 @@ using UnityEngine;
 
 public class ScoreZone : MonoBehaviour
 {
-    public int score;   //Á¡¼ö (Åë°úÇÑ ÆÄÀÌÇÁ ¼ö)
+    public int score;   //ì ìˆ˜ (í†µê³¼í•œ íŒŒì´í”„ ìˆ˜)
 
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.TryGetComponent<PlayerController>(out PlayerController player))
         {
             player.Die();
+
+            GameObject[] pipes = GameObject.FindGameObjectsWithTag("Pipe");
+            if (pipes != null)
+            {
+                foreach (GameObject pipe in pipes)
+                {
+                    pipe.SetActive(false);
+                }
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
         {
-            //ÀÎ½ÄÀº µÇ´Âµ¥ Á¡¼ö Ä«¿îÆ®°¡ ¾È µÊ
-            //GameManager È£ÃâÇØ¼­ Ã³¸®ÇØ¾ß ÇÒ µí
+            //ì¸ì‹ì€ ë˜ëŠ”ë° ì ìˆ˜ ì¹´ìš´íŠ¸ê°€ ì•ˆ ë¨
+            //GameManager í˜¸ì¶œí•´ì„œ ì²˜ë¦¬í•´ì•¼ í•  ë“¯
         }
     }
 }
