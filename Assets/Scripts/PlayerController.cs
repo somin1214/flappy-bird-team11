@@ -114,11 +114,4 @@ public class PlayerController : MonoBehaviour
 
         Destroy(gameObject);
     }
-
-    private void PlayerAnimation()
-    {
-        //y축 움짐임에 따라 애니메이션 달라지게 설정
-        playerAnim.SetFloat("velocityY", rb.velocity.y);
->>>>>>> 210de02f7ae364dddcaebd41b04eb8746ba8e826
-    }
 }
