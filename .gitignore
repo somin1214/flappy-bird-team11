@@ -100,6 +100,6 @@ InitTestScene*.unity*
 
 # VSCode
 /.vscode
-.DS_Store
 
-Assets/.DS_Store
+.DS_Store
+*/.DS_Store
