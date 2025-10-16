@@ -8,19 +8,15 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator playerAnim;
     private float angle = 0f;
-    private bool isPlaying = false; 
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<Animator>();
-
-        rb.simulated = false; //deactivate before the game starts
     }
 
     private void Update()
     {
-        if (!isPlaying) return; //do nothing before the game starts
         rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
 
         if (Input.GetMouseButtonDown(0))
@@ -58,15 +54,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!isPlaying) return;
-
-        //if past pipe
-        if (other.CompareTag("Score"))
-        {
-            GameManager.instance.AddScore();
-            return;
-        }
-
         // 장애물 또는 바닥과 충돌 시 사망 처리
         if (other.CompareTag("Pipe") || other.CompareTag("Ground"))
         {
@@ -74,18 +61,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void StartPlay()
-    {
-        isPlaying = true;
-        rb.simulated = true;
-    }
-
     public void Die()
-{
-    rb.velocity = Vector2.zero;
-    GetComponent<PlayerSfx>()?.PlayDie();
-    GameManager.instance?.GameOver();
-    Destroy(gameObject);
-}
-
+    {
+        rb.velocity = Vector2.zero;
+        Destroy(gameObject);
+    }
 }

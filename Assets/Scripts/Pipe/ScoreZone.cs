@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScoreZone : MonoBehaviour
 {
-    public int score;   //ì ìˆ˜ (í†µê³¼í•œ íŒŒì´í”„ ìˆ˜)
+    public int score;   //Á¡¼ö (Åë°úÇÑ ÆÄÀÌÇÁ ¼ö)
 
     private void OnCollisionEnter2D(Collision2D col)
     {
@@ -26,8 +26,8 @@ public class ScoreZone : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            //ì¸ì‹ì€ ë˜ëŠ”ë° ì ìˆ˜ ì¹´ìš´íŠ¸ê°€ ì•ˆ ë¨
-            //GameManager í˜¸ì¶œí•´ì„œ ì²˜ë¦¬í•´ì•¼ í•  ë“¯
+            //ÀÎ½ÄÀº µÇ´Âµ¥ Á¡¼ö Ä«¿îÆ®°¡ ¾È µÊ
+            //GameManager È£ÃâÇØ¼­ Ã³¸®ÇØ¾ß ÇÒ µí
         }
     }
 }
