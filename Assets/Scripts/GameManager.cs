@@ -19,7 +19,11 @@ public class GameManager : MonoBehaviour
         if (isGameOver) return;
 
         isGameOver = true;
+<<<<<<< HEAD
         // UIManager.instance.ShowGameOver();
+=======
+        //UIManager.instance.ShowGameOver();
+>>>>>>> 210de02f7ae364dddcaebd41b04eb8746ba8e826
     }
 
     public void RestartGame()
