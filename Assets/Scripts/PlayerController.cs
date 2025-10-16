@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Die()
+    public void Die()
     {
         rb.velocity = Vector2.zero;
         Destroy(gameObject);
