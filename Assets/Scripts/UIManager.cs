@@ -34,33 +34,33 @@ public class UIManager : MonoBehaviour
     //private void Start()
     //{
 
-    //    // ¸ŞÀÎ UI
+    //    // ë©”ì¸ UI
     //    //ShowMain();
 
 
-    //    // ÀÎ°ÔÀÓ UI
+    //    // ì¸ê²Œì„ UI
     //    //ShowInGame();
     //    //DisplayInGameScore(123);
 
-    //    // °ÔÀÓ¿À¹ö UI
+    //    // ê²Œì„ì˜¤ë²„ UI
     //    //ShowGameOver(23, 789);
     //}
-
+    
     private bool HideAllPanels()
     {
         if (mainPanel == null)
         {
-            Debug.LogWarning("UIManager¿¡ mainPanel Ãß°¡ÇØÁÖ¼¼¿ä");
+            Debug.LogWarning("UIManagerì— mainPanel ì¶”ê°€í•´ì£¼ì„¸ìš”");
             return false;
         }
         if (inGameScorePanel == null)
         {
-            Debug.LogWarning("UIManager¿¡ inGameScorePanel Ãß°¡ÇØÁÖ¼¼¿ä");
+            Debug.LogWarning("UIManagerì— inGameScorePanel ì¶”ê°€í•´ì£¼ì„¸ìš”");
             return false;
         }
         if (gameOverPanel == null)
         {
-            Debug.LogWarning("UIManager¿¡ gameOverPanel Ãß°¡ÇØÁÖ¼¼¿ä");
+            Debug.LogWarning("UIManagerì— gameOverPanel ì¶”ê°€í•´ì£¼ì„¸ìš”");
             return false;
         }
 
@@ -71,27 +71,27 @@ public class UIManager : MonoBehaviour
         return true;
     }
 
-    // ¸ŞÀÎÈ­¸é UI º¸±â
+     // ë©”ì¸í™”ë©´ UI ë³´ê¸°
     public void ShowMain()
     {
-        // ¹è°æ ½ºÅ©·Ñ ÄÑ±â
+        // ë°°ê²½ ìŠ¤í¬ë¡¤ ì¼œê¸°
         RunScrolling(true);
 
         if (HideAllPanels())
             mainPanel.SetActive(true);
     }
 
-    // ÀÎ°ÔÀÓ UI º¸±â
+    // ì¸ê²Œì„ UI ë³´ê¸°
     public void ShowInGame()
     {
         if (HideAllPanels())
             inGameScorePanel.SetActive(true);
     }
 
-    // °ÔÀÓ¿À¹ö UI º¸±â
+    // ê²Œì„ì˜¤ë²„ UI ë³´ê¸°
     public void ShowGameOver(int currentScore, int bestScore)
     {
-        // ¹è°æ ½ºÅ©·Ñ ²ô±â
+        // ë°°ê²½ ìŠ¤í¬ë¡¤ ë„ê¸°
         RunScrolling(false);
 
         if (HideAllPanels())
@@ -105,34 +105,34 @@ public class UIManager : MonoBehaviour
         DisplayScore(bestScore, bestScoreDigits);
     }
 
-    // ÀÎ°ÔÀÓ Á¡¼ö Ç¥½Ã
+    // ì¸ê²Œì„ ì ìˆ˜ í‘œì‹œ
     public void DisplayInGameScore(int score)
     {
         string scoreText = score.ToString();
         int digitCount = scoreText.Length;
 
-        // ÀüÃ¼ ³Êºñ °è»ê
+        // ì „ì²´ ë„ˆë¹„ ê³„ì‚°
         float totalWidth = (digitCount - 1) * digitSpacing;
-        float startX = -totalWidth / 2f; // Áß¾Ó ±âÁØ ½ÃÀÛÁ¡
+        float startX = -totalWidth / 2f; // ì¤‘ì•™ ê¸°ì¤€ ì‹œì‘ì 
 
         HideNumberDigits(gameScoreDigits);
 
 
-        // ÇÊ¿äÇÑ ÀÚ¸®¼ö¸¸ È°¼ºÈ­ ¹× ¹èÄ¡
+        // í•„ìš”í•œ ìë¦¬ìˆ˜ë§Œ í™œì„±í™” ë° ë°°ì¹˜
         for (int i = 0; i < digitCount; i++)
         {
             int digit = scoreText[i] - '0';
             gameScoreDigits[i].sprite = numberSprites[digit];
             gameScoreDigits[i].gameObject.SetActive(true);
 
-            // Áß¾Ó Á¤·Ä À§Ä¡ ¼³Á¤
+            // ì¤‘ì•™ ì •ë ¬ ìœ„ì¹˜ ì„¤ì •
             Vector3 pos = gameScoreDigits[i].transform.localPosition;
             pos.x = startX + (i * digitSpacing);
             gameScoreDigits[i].transform.localPosition = pos;
         }
     }
 
-    // ¹è°æ ½ºÅ©·Ñ Á¶ÀÛ
+    // ë°°ê²½ ìŠ¤í¬ë¡¤ ì¡°ì‘
     public void RunScrolling(bool enabled)
     {
         foreach (TilemapScroller map in tilemapScrollers)
@@ -142,7 +142,7 @@ public class UIManager : MonoBehaviour
     }
 
 
-    // ½ºÇÁ¶óÀÌÆ®·Î Á¡¼ö Ç¥½Ã
+    // ìŠ¤í”„ë¼ì´íŠ¸ë¡œ ì ìˆ˜ í‘œì‹œ
     private void DisplayScore(int score, Image[] digitImages)
     {
         HideNumberDigits(digitImages);
@@ -157,7 +157,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    // ¸ğµç ÀÚ¸®¼ö ºñÈ°¼ºÈ­
+    // ëª¨ë“  ìë¦¬ìˆ˜ ë¹„í™œì„±í™”
     private void HideNumberDigits(Image[] digits)
     {
 
