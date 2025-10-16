@@ -7,8 +7,8 @@ public class PipeSpawner : MonoBehaviour
     [Header("설정")]
     [SerializeField] private PipeMovement pipePrefab;
     [SerializeField] private int pipePoolSize = 5;
-    [SerializeField] private float columnMin = 2.0f;
-    [SerializeField] private float columnMax = 5.0f;
+    [SerializeField] private float heightMin = 2.0f;
+    [SerializeField] private float heightMax = 5.0f;
     [SerializeField] private float spawnInterval = 1.7f;
 
 
@@ -32,7 +32,6 @@ public class PipeSpawner : MonoBehaviour
             var pipe = Instantiate(pipePrefab, transform);
             pipe.gameObject.SetActive(false);
             pipes.Add(pipe);
-            //빨간색...
         }
     }
     //스폰 반복
@@ -47,7 +46,7 @@ public class PipeSpawner : MonoBehaviour
     //스폰 위치 지정
     private void SpawnOffset()
     {
-        spawnY = Random.Range(columnMin, columnMax);
+        spawnY = Random.Range(heightMin, heightMax);
 
         Vector2 pos = new Vector2(spawnX, spawnY);
         SpawnPipe(pos);
@@ -61,7 +60,7 @@ public class PipeSpawner : MonoBehaviour
         pipe.gameObject.SetActive(true);
 
     }
-    //파이프를 소환 위치로 가져옴
+    //파이프를 가져옴
     private PipeMovement GetFromPipe()
     {
         for (int i = 0; i < pipes.Count; i++)
