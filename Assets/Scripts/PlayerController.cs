@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float jumpForce = 5.0f;
-    [SerializeField] private float moveSpeed = 3.0f;
+    [SerializeField] private float jumpForce = 7.0f;
+    [SerializeField] private float moveSpeed = 2.0f;
 
     private Rigidbody2D rb;
     private Animator playerAnim;
