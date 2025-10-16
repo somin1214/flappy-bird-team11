@@ -2,123 +2,68 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-<<<<<<< HEAD
     [SerializeField] private float jumpForce = 5.0f;
     [SerializeField] private float moveSpeed = 3.0f;
 
     private Rigidbody2D rb;
     private Animator playerAnim;
-
     private float angle = 0f;
-=======
-    [SerializeField] private float addForce = 5.0f;
-    [SerializeField] private float moveSpeed = 3.0f;
 
-    private Rigidbody2D rb;
-
-    private Animator playerAnim;
->>>>>>> 210de02f7ae364dddcaebd41b04eb8746ba8e826
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<Animator>();
     }
-<<<<<<< HEAD
 
     private void Update()
     {
         rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
 
-        //PlayerAnimation();
-        Rotation();
-    }
-    private void PlayerAnimation()
-    {
-        //yÀÌµ¿°ª¿¡ µû¶ó À§, ¾Æ·¡ ¾Ö´Ï¸ÞÀÌ¼Ç ´Þ¶óÁö°Ô ¼³Á¤
-        playerAnim.SetFloat("Velocity.y", rb.velocity.y);
-    }
-
-    //Ä³¸¯ÅÍ º¸´Â ¹æÇâ ÇÔ¼ö
-    private void Rotation()
-    {
-        float velocityY = rb.velocity.y;
-        float target = 0f;
-
-        //À§·Î ÀÌµ¿ ½Ã 45µµ, ¾Æ·¡·Î  -45µµ
-        if (velocityY > 0.01f)
-        {
-            target = 45f;
-        }
-        else if (velocityY < -0.01f)
-        {
-            target = -45f;
-        }
-
-        //ºÎµå·´°Ô È¸Àü
-        angle = Mathf.Lerp(angle, target, Time.deltaTime * 5f);
-
-        //Clamp -> °¢µµ Á¦ÇÑ(-45~45)
-        angle = Mathf.Clamp(angle, -45f, 45f);
-
-        //È¸Àü Àû¿ë
-        transform.rotation = Quaternion.Euler(0f, 0f, angle);
-=======
-    void Update()
-    {
-        rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
->>>>>>> 210de02f7ae364dddcaebd41b04eb8746ba8e826
-    }
-
-    private void FixedUpdate()
-    {
         if (Input.GetMouseButtonDown(0))
         {
-<<<<<<< HEAD
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        }
-=======
-            rb.velocity = new Vector2(rb.velocity.x, addForce);
         }
 
         RotatePlayer();
+        UpdateAnimation();
     }
 
-    //ÇÃ·¹ÀÌ¾î º¸´Â ¹æÇâ ÇÔ¼ö
     private void RotatePlayer()
     {
-        //5f(Á¡ÇÁ³ôÀÌ)¸¸Å­ °¢µµÁ¤ÇÏ±â, ¾Æ·¡·Î´Â ÃÖ´ë -90, À§·Î´Â ÃÖ´ë45
-        float angle = Mathf.Clamp(rb.velocity.y * 5f, -90f, 45f);
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        // yì†ë„ì— ë”°ë¼ íšŒì „ (ìœ„ë¡œ ì˜¬ë¼ê°ˆ ë•Œ 45ë„, ì•„ëž˜ë¡œ ë‚´ë ¤ê°ˆ ë•Œ -45ë„)
+        float velocityY = rb.velocity.y;
+        float targetAngle = 0f;
+
+        if (velocityY > 0.01f)
+            targetAngle = 45f;
+        else if (velocityY < -0.01f)
+            targetAngle = -45f;
+
+        // ë¶€ë“œëŸ½ê²Œ íšŒì „
+        angle = Mathf.Lerp(angle, targetAngle, Time.deltaTime * 5f);
+        angle = Mathf.Clamp(angle, -45f, 45f);
+
+        transform.rotation = Quaternion.Euler(0f, 0f, angle);
+    }
+
+    private void UpdateAnimation()
+    {
+        if (playerAnim != null)
+            playerAnim.SetFloat("velocityY", rb.velocity.y);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //if (other.CompareTag("Score"))
-        //{
-        //    AddScore();
-        //}
-
-        //ÆÄÀÌÇÁ or À§,¾Æ·¡ ¶¥¿¡ ´êÀ¸¸é Á×À½
+        // ìž¥ì• ë¬¼ ë˜ëŠ” ë°”ë‹¥ê³¼ ì¶©ëŒ ì‹œ ì‚¬ë§ ì²˜ë¦¬
         if (other.CompareTag("Pipe") || other.CompareTag("Ground"))
         {
             Die();
         }
-
-        PlayerAnimation();
     }
 
     private void Die()
     {
-        //Á×À¸¸é ¼Óµµ0 ¼³Á¤
         rb.velocity = Vector2.zero;
-
         Destroy(gameObject);
-    }
-
-    private void PlayerAnimation()
-    {
-        //yÃà ¿òÁüÀÓ¿¡ µû¶ó ¾Ö´Ï¸ÞÀÌ¼Ç ´Þ¶óÁö°Ô ¼³Á¤
-        playerAnim.SetFloat("velocityY", rb.velocity.y);
->>>>>>> 210de02f7ae364dddcaebd41b04eb8746ba8e826
     }
 }
