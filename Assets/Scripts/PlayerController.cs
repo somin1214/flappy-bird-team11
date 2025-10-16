@@ -83,8 +83,7 @@ public class PlayerController : MonoBehaviour
     public void Die()
 {
     rb.velocity = Vector2.zero;
-    GetComponent<PlayerSfx>()?.PlayDie();
-    GameManager.instance?.GameOver();
+    GameManager.instance.GameOver();
     Destroy(gameObject);
 }
 

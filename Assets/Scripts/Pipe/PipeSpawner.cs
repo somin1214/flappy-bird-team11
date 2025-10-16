@@ -21,6 +21,10 @@ public class PipeSpawner : MonoBehaviour
     void Start()
     {
         SetupPipes();
+    }
+
+    public void StartSpawning()
+    {
         StartCoroutine(AutoSpawnCo());
     }
 

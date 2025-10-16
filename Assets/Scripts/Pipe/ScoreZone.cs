@@ -28,6 +28,7 @@ public class ScoreZone : MonoBehaviour
         {
             //인식은 되는데 점수 카운트가 안 됨
             //GameManager 호출해서 처리해야 할 듯
+            GameManager.instance.AddScore();
         }
     }
 }
