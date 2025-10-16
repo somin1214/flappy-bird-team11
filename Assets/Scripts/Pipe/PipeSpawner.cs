@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PipeSpawner : MonoBehaviour
 {
-    [Header("¼³Á¤")]
+    [Header("ì„¤ì •")]
     [SerializeField] private PipeMovement pipePrefab;
     [SerializeField] private int pipePoolSize = 5;
     [SerializeField] private float heightMin = 2.0f;
@@ -24,7 +24,7 @@ public class PipeSpawner : MonoBehaviour
         StartCoroutine(AutoSpawnCo());
     }
 
-    //½ÃÀÛ ½ÃÁ¡ °³¼ö¸¸Å­ ÇÁ¸®ÆÕ »ı¼º
+    //ì‹œì‘ ì§€ì  ê°œìˆ˜ë§Œí¼ í”„ë¦¬íŒ¹ ìƒì„±
     private void SetupPipes()
     {
         for (int i = 0; i < pipePoolSize; i++)
@@ -34,7 +34,7 @@ public class PipeSpawner : MonoBehaviour
             pipes.Add(pipe);
         }
     }
-    //½ºÆù ¹İº¹
+    //ìŠ¤í° ë°˜ë³µ
     private IEnumerator AutoSpawnCo()
     {
         while (true)
@@ -43,7 +43,7 @@ public class PipeSpawner : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
         }
     }
-    //½ºÆù À§Ä¡ ÁöÁ¤
+    //ìŠ¤í° ìœ„ì¹˜ ì§€ì •
     private void SpawnOffset()
     {
         spawnY = Random.Range(heightMin, heightMax);
@@ -51,7 +51,7 @@ public class PipeSpawner : MonoBehaviour
         Vector2 pos = new Vector2(spawnX, spawnY);
         SpawnPipe(pos);
     }
-    //½ºÆù
+    //ìŠ¤í°
     public void SpawnPipe(Vector2 spawnPosition)
     {
         PipeMovement pipe = GetFromPipe();
@@ -60,7 +60,7 @@ public class PipeSpawner : MonoBehaviour
         pipe.gameObject.SetActive(true);
 
     }
-    //ÆÄÀÌÇÁ¸¦ °¡Á®¿È
+    //íŒŒì´í”„ë¥¼ ê°€ì ¸ì˜´
     private PipeMovement GetFromPipe()
     {
         for (int i = 0; i < pipes.Count; i++)
@@ -72,7 +72,7 @@ public class PipeSpawner : MonoBehaviour
                 return p;
             }
         }
-        //ºñÈ°¼ºÈ­µÈ ÇÁ¸®ÆÕÀÌ ¾øÀ¸¸é Ãß°¡ »ı¼º
+        //ë¹„í™œì„±í™”ëœ í”„ë¦¬íŒ¹ì´ ì—†ìœ¼ë©´ ì¶”ê°€ ìƒì„±
         var newPipe = Instantiate(pipePrefab, transform);
         newPipe.gameObject.SetActive(false);
         pipes.Add(newPipe);

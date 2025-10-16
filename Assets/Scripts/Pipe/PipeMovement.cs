@@ -1,39 +1,40 @@
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class PipeMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5.0f;
-    [SerializeField] private float speedUp = 0.01f;
-    //º¯°æ Ã³¸® °¡´ÉÇÑ ±âº» ÀÌµ¿ ¼Óµµ
-    //À¯´ÏÆ¼¿¡¼­ ÇÃ·¹ÀÌ¾î¿Í È®ÀÎ ÇÊ¿ä
+    [SerializeField] private float destroyX = -10f;
 
-    //½ÇÁ¦ Àû¿ëµÉ ¼Óµµ
-    public float Speed
-    {
-        get { return Speed; }
-        set { Speed = moveSpeed * 1+(speedUpCount * speedUp); }
-        //10ÀÏ ¶§ moveSpeed * 1.01f ¸¸Å­ Áõ°¡
-    }
+    //ë³€ê²½ ì²˜ë¦¬ ê°€ëŠ¥í•œ ê¸°ë³¸ ì´ë™ ì†ë„
+    //ìœ ë‹ˆí‹°ì—ì„œ í”Œë ˆì´ì–´ì™€ í™•ì¸ í•„ìš”
     private ScoreZone scoring;
     private int score;
     private int speedUpCount;
 
     private Vector2 initSpawnPosition;
-    [SerializeField] float deSpawnX = -10.0f;
+    //ì‹¤ì œ ì ìš©ë  ì†ë„
+    public float Speed
+    {
+        get { return moveSpeed; }
+        set { moveSpeed = value * (1f+(speedUpCount * 0.01f)); }
+        //10ì¼ ë•Œ moveSpeed * 1.01f ë§Œí¼ ì¦ê°€
+    }
 
     private void Awake()
     {
-        //¼Óµµ Ã³¸® º¯¼ö¸¦ À§ÇØ Á¡¼ö¸¦ ¹Ş¾Æ¿È
+        //ì†ë„ ì²˜ë¦¬ ë³€ìˆ˜ë¥¼ ìœ„í•´ ì ìˆ˜ë¥¼ ë°›ì•„ì˜´
         scoring = GetComponent<ScoreZone>();
-        score = scoring.score;
-        speedUpCount = score/10;
+        if(scoring != null)
+        {
+            score = scoring.score;
+            speedUpCount = score / 10;
+        }
     }
     void Update()
     {
         transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
 
-        if (transform.position.x < deSpawnX)
+        if (transform.position.x < destroyX)
         {
             gameObject.SetActive(false);
         }

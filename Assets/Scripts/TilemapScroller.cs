@@ -7,12 +7,12 @@ public class TilemapScroller : MonoBehaviour
     public bool autoScroll = true;
 
     [Header("Loop Settings")]
-    public float resetPositionX = -20f; // ÀÌ À§Ä¡¿¡ µµ´ŞÇÏ¸é
-    public float startPositionX = 0;   // ¿©±â·Î ¸®¼Â
+    public float resetPositionX = -20f; // ì´ ìœ„ì¹˜ì— ë„ë‹¬í•˜ë©´
+    public float startPositionX = 0;   // ì—¬ê¸°ë¡œ ë¦¬ì…‹
 
     [Header("Gizmo Settings")]
     public bool showGizmos = true;
-    public float gizmoHeight = 10f; // Gizmo ¼±ÀÇ ³ôÀÌ
+    public float gizmoHeight = 10f; // Gizmo ì„ ì˜ ë†’ì´
     public Color resetColor = Color.red;
     public Color startColor = Color.green;
 
@@ -20,10 +20,10 @@ public class TilemapScroller : MonoBehaviour
     {
         if (autoScroll)
         {
-            // ¿ŞÂÊÀ¸·Î ½ºÅ©·Ñ
+            // ì™¼ìª½ìœ¼ë¡œ ìŠ¤í¬ë¡¤
             transform.position += Vector3.left * scrollSpeed * Time.deltaTime;
 
-            // ¹«ÇÑ ·çÇÁ
+            // ë¬´í•œ ë£¨í”„
             if (transform.position.x <= resetPositionX)
             {
                 Vector3 pos = transform.position;
@@ -33,51 +33,51 @@ public class TilemapScroller : MonoBehaviour
         }
     }
 
-    // Scene ºä¿¡¼­ Gizmo ±×¸®±â
+    // Scene ë·°ì—ì„œ Gizmo ê·¸ë¦¬ê¸°
     void OnDrawGizmos()
     {
         if (!showGizmos) return;
 
         float yPos = transform.position.y;
 
-        // Reset Position ¼± (»¡°£»ö)
+        // Reset Position ì„  (ì´ˆë¡ìƒ‰)
         Gizmos.color = resetColor;
         Vector3 resetTop = new Vector3(resetPositionX, yPos + gizmoHeight / 2, 0);
         Vector3 resetBottom = new Vector3(resetPositionX, yPos - gizmoHeight / 2, 0);
         Gizmos.DrawLine(resetTop, resetBottom);
 
-        // Start Position ¼± (ÃÊ·Ï»ö)
+        // Start Position ì„  (ì´ˆë¡ìƒ‰)
         Gizmos.color = startColor;
         Vector3 startTop = new Vector3(startPositionX, yPos + gizmoHeight / 2, 0);
         Vector3 startBottom = new Vector3(startPositionX, yPos - gizmoHeight / 2, 0);
         Gizmos.DrawLine(startTop, startBottom);
 
-        // È­»ìÇ¥ ±×¸®±â (Reset ¡æ Start)
+        // í™”ì‚´í‘œ ê·¸ë¦¬ê¸° (Reset -> Start)
         Gizmos.color = Color.yellow;
         Vector3 arrowStart = new Vector3(resetPositionX, yPos, 0);
         Vector3 arrowEnd = new Vector3(startPositionX, yPos, 0);
         Gizmos.DrawLine(arrowStart, arrowEnd);
 
-        // È­»ìÇ¥ ³¡ Ç¥½Ã
+        // í™”ì‚´í‘œ ë í‘œì‹œ
         Vector3 arrowTip1 = arrowEnd + new Vector3(-0.5f, 0.5f, 0);
         Vector3 arrowTip2 = arrowEnd + new Vector3(-0.5f, -0.5f, 0);
         Gizmos.DrawLine(arrowEnd, arrowTip1);
         Gizmos.DrawLine(arrowEnd, arrowTip2);
     }
 
-    // ¼±ÅÃµÇ¾úÀ» ¶§¸¸ Gizmo ±×¸®±â (´õ ¼±¸íÇÏ°Ô)
+    // ì„ íƒë˜ì—ˆì„ ë•Œë§Œ Gizmo ê·¸ë¦¬ê¸° (ë” ì„ ëª…í•˜ê²Œ)
     void OnDrawGizmosSelected()
     {
         if (!showGizmos) return;
 
         float yPos = transform.position.y;
 
-        // Reset Position ¿µ¿ª Ç¥½Ã
+        // Reset Position ì˜ì—­ í‘œì‹œ
         Gizmos.color = new Color(resetColor.r, resetColor.g, resetColor.b, 0.3f);
         Vector3 resetBoxCenter = new Vector3(resetPositionX, yPos, 0);
         Gizmos.DrawCube(resetBoxCenter, new Vector3(0.5f, gizmoHeight, 0.1f));
 
-        // Start Position ¿µ¿ª Ç¥½Ã
+        // Start Position ì˜ì—­ í‘œì‹œ
         Gizmos.color = new Color(startColor.r, startColor.g, startColor.b, 0.3f);
         Vector3 startBoxCenter = new Vector3(startPositionX, yPos, 0);
         Gizmos.DrawCube(startBoxCenter, new Vector3(0.5f, gizmoHeight, 0.1f));
