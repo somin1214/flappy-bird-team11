@@ -11,6 +11,15 @@ public class ScoreZone : MonoBehaviour
         if (col.gameObject.TryGetComponent<PlayerController>(out PlayerController player))
         {
             player.Die();
+
+            GameObject[] pipes = GameObject.FindGameObjectsWithTag("Pipe");
+            if (pipes != null)
+            {
+                foreach (GameObject pipe in pipes)
+                {
+                    pipe.SetActive(false);
+                }
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D col)
