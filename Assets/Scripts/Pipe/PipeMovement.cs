@@ -1,19 +1,23 @@
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class PipeMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5.0f;
+    [SerializeField] private float speedUp = 0.01f;
     //변경 처리 가능한 기본 이동 속도
     //유니티에서 플레이어와 확인 필요
 
-    //실제 적용될 속도 (추후 점수에 따라 변화하기 위함)
+    //실제 적용될 속도
     public float Speed
     {
         get { return Speed; }
-        set { Speed = moveSpeed; } //score 활용법 고민 필요
+        set { Speed = moveSpeed * 1+(speedUpCount * speedUp); }
+        //10일 때 moveSpeed * 1.01f 만큼 증가
     }
     private ScoreZone scoring;
     private int score;
+    private int speedUpCount;
 
     private Vector2 initSpawnPosition;
     [SerializeField] float deSpawnX = -10.0f;
@@ -23,6 +27,7 @@ public class PipeMovement : MonoBehaviour
         //속도 처리 변수를 위해 점수를 받아옴
         scoring = GetComponent<ScoreZone>();
         score = scoring.score;
+        speedUpCount = score/10;
     }
     void Update()
     {
