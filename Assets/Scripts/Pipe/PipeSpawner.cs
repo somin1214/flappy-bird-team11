@@ -9,8 +9,6 @@ public class PipeSpawner : MonoBehaviour
     [SerializeField] private int pipePoolSize = 5;
     [SerializeField] private float heightMin = 2.0f;
     [SerializeField] private float heightMax = 5.0f;
-    [SerializeField] private float heightMin = 2.0f;
-    [SerializeField] private float heightMax = 5.0f;
     [SerializeField] private float spawnInterval = 1.7f;
 
 
@@ -48,7 +46,6 @@ public class PipeSpawner : MonoBehaviour
     //스폰 위치 지정
     private void SpawnOffset()
     {
-        spawnY = Random.Range(heightMin, heightMax);
         spawnY = Random.Range(heightMin, heightMax);
 
         Vector2 pos = new Vector2(spawnX, spawnY);
