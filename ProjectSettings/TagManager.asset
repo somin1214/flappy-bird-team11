@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - Pipe
+  - Score
+  - Undefined
   layers:
   - Default
   - TransparentFX
@@ -46,4 +50,7 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 3145711737
+    locked: 0
+  - name: Player
+    uniqueID: 855069793
     locked: 0

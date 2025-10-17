@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     {
         UIManager.instance.ShowMain();
     }
-
+    
     public void StartGame()
     {
         currentScore = 0;
@@ -41,8 +41,8 @@ public class GameManager : MonoBehaviour
         if (player != null)
             player.StartPlay();
 
-        if (spawnerScript != null)
-            spawnerScript.StartSpawning();
+        //if (spawnerScript != null)
+            //spawnerScript.StartSpawning();
     }
     
     public void AddScore()
@@ -54,11 +54,15 @@ public class GameManager : MonoBehaviour
     {
         UIManager.instance.RunScrolling(false);
 
-        if (spawnerScript != null)
-            spawnerScript.StopSpawning();
+        //if (spawnerScript != null)
+        //spawnerScript.StopSpawning();
 
+        bestScore = PlayerPrefs.GetInt("HighScore", 0);
         if (currentScore > bestScore)
+        {
             bestScore = currentScore;
+            PlayerPrefs.SetInt("HighScore", bestScore);
+        }
 
         UIManager.instance.ShowGameOver(currentScore, bestScore);
     }
