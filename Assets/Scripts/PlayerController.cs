@@ -98,6 +98,11 @@ public class PlayerController : MonoBehaviour
         {
             Die();
         }
+        else if (other.CompareTag("Score"))
+        {
+            GameManager.instance.AddScore();
+            return;
+        }
     }
 
     public void Die()

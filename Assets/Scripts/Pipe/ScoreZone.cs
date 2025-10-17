@@ -21,12 +21,12 @@ public class ScoreZone : MonoBehaviour
     }
 
     //ScoreZone 코드 수정
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.CompareTag("Player"))
-        {
-            if (gmScript != null)
-                gmScript.AddScore();
-        }
-    }
+    // private void OnTriggerEnter2D(Collider2D col)
+    // {
+    //     if (col.CompareTag("Player"))
+    //     {
+    //         if (gmScript != null)
+    //             gmScript.AddScore();
+    //     }
+    // }
 }

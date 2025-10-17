@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
         if (isGameOver) return;
 
         currentScore++;
+        UIManager.instance.DisplayInGameScore(currentScore); 
     }
     public int GetScore()
     {
