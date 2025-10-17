@@ -25,7 +25,7 @@ public class PoolManager : MonoBehaviour
         }
     }
 
-    //Ç® »ı¼º ¹× µñ¼Å³Ê¸® µî·Ï
+    //í’€ ìƒì„± ë° ë”•ì…”ë„ˆë¦¬ ë“±ë¡
     public void CreatePool<T>(T prefab, int initCount, Transform parent = null) where T :  MonoBehaviour
     {
         if (prefab == null) return;
@@ -38,7 +38,7 @@ public class PoolManager : MonoBehaviour
 
     }
     
-    //Ç® »ç¿ë(È°¼ºÈ­)
+    //í’€ ì‚¬ìš©(í™œì„±í™”)
     public T GetFromPool<T>(T prefab) where T : MonoBehaviour
     {
         if (prefab == null) return null;
@@ -60,7 +60,7 @@ public class PoolManager : MonoBehaviour
         }
     }
     
-    //Ç® ´Ù½Ã ³ÖÀ½(ºñÈ°¼ºÈ­)
+    //í’€ ë‹¤ì‹œ ë„£ìŒ(ë¹„í™œì„±í™”)
     public void ReturnPool<T>(T instance) where T :  MonoBehaviour
     {
 

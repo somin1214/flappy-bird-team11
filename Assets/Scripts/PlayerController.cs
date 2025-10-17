@@ -1,31 +1,63 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour
 {
+    [Header("Player Settings")]
     [SerializeField] private float jumpForce = 7.0f;
     [SerializeField] private float moveSpeed = 2.0f;
+    // added
+    [SerializeField] private float rotationSpeed = 5.0f;
+    [SerializeField] private float maxRotation = 45f;
 
     private Rigidbody2D rb;
     private Animator playerAnim;
     private float angle = 0f;
+    private bool flapRequested = false;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<Animator>();
+
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.gravityScale = 1f;
+        rb.freezeRotation = true;
     }
 
     private void Update()
     {
-        rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
-
         if (Input.GetMouseButtonDown(0))
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            flapRequested = true;
         }
-
         RotatePlayer();
         UpdateAnimation();
+    }
+
+    private void FixedUpdate()
+    {
+        // jump on click
+        if (flapRequested)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            flapRequested = false;
+        }
+            
+        // Constant forward movement
+        rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+    }
+
+    public void StartPlay()
+    {
+        gameObject.SetActive(true);
+        rb.velocity = Vector2.zero;
+        rb.gravityScale = 1f;
+        flapRequested = false;
+        angle = 0f;
+        transform.position = new Vector3(-5f, 0f, 0f); // set starting position
+        transform.rotation = Quaternion.identity;
     }
 
     private void RotatePlayer()
@@ -62,8 +94,10 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Die()
-    {
-        rb.velocity = Vector2.zero;
-        Destroy(gameObject);
-    }
+{
+    rb.velocity = Vector2.zero;
+    GameManager.instance.GameOver();
+    gameObject.SetActive(false); // hide instead of destroying
+}
+
 }
