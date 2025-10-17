@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Settings")]
-    [SerializeField] private float jumpForce = 7.0f;       // 점프 힘
+    [SerializeField] private float jumpForce = 5.0f;       // 점프 힘
     [SerializeField] private float moveSpeed = 2.0f;       // 앞으로 이동 속도
     [SerializeField] private float rotationSpeed = 5.0f;   // 회전 속도
     [SerializeField] private float maxRotation = 45f;      // 최대 회전 각도
