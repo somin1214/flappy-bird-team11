@@ -21,7 +21,7 @@
 | Player 담당: 차태완 | 새의 점프 및 충돌 로직 | PlayerController.cs |
 | Pipe 담당: 이진송 | 파이프 생성 및 이동 | PipeSpawner.cs, PipeMovement.cs .. |
 | UI 담당: 신태환 | 점수 표시, UI, 배경 | UIManager.cs |
-| 리소스 담당: 이소민 | 배경, 스프라이트, 프리팹 제작 | /audio /Animation |
+| 리소스 담당: 반재형 | 오디오, 애니메이션 | /audio /Animation |
 
 ---
 
