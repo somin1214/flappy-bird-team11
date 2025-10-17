@@ -20,13 +20,11 @@ public class PipeSpawner : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("🔥 PipeSpawner.Start() called!");
         SetupPipes();
     }
 
     public void StartSpawning()
     {
-        Debug.Log("🚀 StartSpawning() called!");
         StartCoroutine(AutoSpawnCo());
     }
 
@@ -43,7 +41,6 @@ public class PipeSpawner : MonoBehaviour
     //스폰 반복
     private IEnumerator AutoSpawnCo()
     {
-        Debug.Log("🚀 AutoSpawnCo started!");
         while (true)
         {
             SpawnOffset();
@@ -54,7 +51,6 @@ public class PipeSpawner : MonoBehaviour
     private void SpawnOffset()
     {
         spawnY = Random.Range(heightMin, heightMax);
-        Debug.Log($"🌈 Spawning pipe at Y = {spawnY}");
         Vector2 pos = new Vector2(spawnX, spawnY);
         SpawnPipe(pos);
     }

@@ -21,11 +21,9 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            Debug.Log($"✅ GameManager Awake called on {gameObject.name}");
         }
         else
         {
-            Debug.LogWarning($"⚠️ Duplicate GameManager destroyed on {gameObject.name}");
             Destroy(gameObject);
         }
             
@@ -40,11 +38,6 @@ public class GameManager : MonoBehaviour
         if (pipeSpawner != null)
         {
             spawnerScript = pipeSpawner.GetComponent<PipeSpawner>();
-            Debug.Log("✅ PipeSpawner component found!");
-        }
-        else
-        {
-            Debug.LogError("❌ PipeSpawner GameObject is not assigned in the GameManager.");
         }
         
         if (player != null)
@@ -56,7 +49,6 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {   
-        Debug.Log("▶️ StartGame called!");
         Time.timeScale = 1.0f;
         isGameOver = false;
         currentScore = 0;
@@ -66,12 +58,7 @@ public class GameManager : MonoBehaviour
 
         if (spawnerScript != null)
         {
-            Debug.Log("🌀 Starting pipe spawn coroutine...");
             spawnerScript.StartSpawning();
-        }
-        else
-        {
-            Debug.LogError("❌ spawnerScript is null!");
         }
         
         if(player != null)
@@ -80,13 +67,16 @@ public class GameManager : MonoBehaviour
             player.StartPlay();
         }
     }
-    
+
     public void AddScore()
     {
         if (isGameOver) return;
 
         currentScore++;
-        uiManager.DisplayInGameScore(currentScore);
+    }
+    public int GetScore()
+    {
+        return currentScore;
     }
     public void GameOver()
     {
@@ -105,4 +95,5 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+    
 }
