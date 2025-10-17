@@ -21,6 +21,10 @@ public class PipeSpawner : MonoBehaviour
     void Start()
     {
         SetupPipes();
+    }
+
+    public void StartSpawning()
+    {
         StartCoroutine(AutoSpawnCo());
     }
 
@@ -47,7 +51,6 @@ public class PipeSpawner : MonoBehaviour
     private void SpawnOffset()
     {
         spawnY = Random.Range(heightMin, heightMax);
-
         Vector2 pos = new Vector2(spawnX, spawnY);
         SpawnPipe(pos);
     }

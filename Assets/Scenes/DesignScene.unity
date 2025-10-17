@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 70848522}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -253,7 +253,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1149255559
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2.3, y: 0.14166665, z: 0}
@@ -1526,13 +1526,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3556841213347950171, guid: da2d2a6bdf73f274ba1965ef4178701c, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 6747981370052933385, guid: da2d2a6bdf73f274ba1965ef4178701c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6747981370052933385, guid: da2d2a6bdf73f274ba1965ef4178701c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6747981370052933385, guid: da2d2a6bdf73f274ba1965ef4178701c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6747981370052933385, guid: da2d2a6bdf73f274ba1965ef4178701c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1574,6 +1582,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6747981370052933385, guid: da2d2a6bdf73f274ba1965ef4178701c, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7018347797334216761, guid: da2d2a6bdf73f274ba1965ef4178701c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7018347797334216761, guid: da2d2a6bdf73f274ba1965ef4178701c, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6b8303f901936417a9ccd1b5821cb50a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1763,7 +1783,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6aa6e35962a27e499e593d45465d1ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOverUI: {fileID: 0}
+  gameOverUI: {fileID: 1442105919}
+  uiManager: {fileID: 0}
   player: {fileID: 1667573954}
   pipeSpawner: {fileID: 176455449}
 --- !u!4 &895450741
@@ -2527,6 +2548,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 7
   moveSpeed: 0
+  rotationSpeed: 5
+  maxRotation: 45
 --- !u!1 &1677387513
 GameObject:
   m_ObjectHideFlags: 0

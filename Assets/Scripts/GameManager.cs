@@ -1,61 +1,86 @@
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class GameManager : MonoBehaviour
 {
+
     public static GameManager instance;
     public GameObject gameOverUI;
 
+    [SerializeField] private UIManager uiManager;
     [SerializeField] private PlayerController player;
     [SerializeField] private GameObject pipeSpawner; // pipe
     private PipeSpawner spawnerScript;
-   
+
     private int currentScore = 0;
     private int bestScore = 0;
-
-    void Awake()
+    private bool isGameOver = false;
+    private void Awake()
     {
         if (instance == null)
             instance = this;
         else
             Destroy(gameObject);
 
-        if (pipeSpawner != null)
-            spawnerScript = pipeSpawner.GetComponent<PipeSpawner>();
+        // 안전하게 UIManager 참조
+        if (uiManager == null)
+            uiManager = UIManager.instance;
     }
+
 
     private void Start()
     {
-        UIManager.instance.ShowMain();
-    }
-    
-    public void StartGame()
-    {
-        currentScore = 0;
-        UIManager.instance.ShowInGame();
-        UIManager.instance.DisplayInGameScore(currentScore);
-        UIManager.instance.RunScrolling(true);
+        Time.timeScale = 0.0f;
+        uiManager.ShowMain();
 
+        //Caching the PipeSpawner component
+        if (pipeSpawner != null)
+        {
+            spawnerScript = pipeSpawner.GetComponent<PipeSpawner>();
+        }
+        
         if (player != null)
-            player.StartPlay();
+        {
+            player.gameObject.SetActive(false); // hide at main menu
+        }
 
-        //if (spawnerScript != null)
-            //spawnerScript.StartSpawning();
     }
-    
+
+    public void StartGame()
+    {   
+        Time.timeScale = 1.0f;
+        isGameOver = false;
+        currentScore = 0;
+        uiManager.ShowInGame();
+        uiManager.DisplayInGameScore(currentScore);
+        uiManager.RunScrolling(true);
+
+        if (spawnerScript != null)
+        {
+            spawnerScript.StartSpawning();
+        }
+        
+        if(player != null)
+        {
+            player.gameObject.SetActive(true);
+            player.StartPlay();
+        }
+    }
+
     public void AddScore()
     {
+        if (isGameOver) return;
+
         currentScore++;
-        UIManager.instance.DisplayInGameScore(currentScore);
+    }
+    public int GetScore()
+    {
+        return currentScore;
     }
     public void GameOver()
     {
-        UIManager.instance.RunScrolling(false);
-
-        //if (spawnerScript != null)
-        //spawnerScript.StopSpawning();
+        isGameOver = true;
+        Time.timeScale = 0.0f;
 
         bestScore = PlayerPrefs.GetInt("HighScore", 0);
         if (currentScore > bestScore)
@@ -64,11 +89,17 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("HighScore", bestScore);
         }
 
-        UIManager.instance.ShowGameOver(currentScore, bestScore);
+         if (UIManager.instance != null)
+        {
+            UIManager.instance.RunScrolling(false);
+            UIManager.instance.ShowGameOver(currentScore, bestScore);
+        }
+
     }
+
     public void RestartGame()
     {
-        Time.timeScale = 1.0f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+    
 }
